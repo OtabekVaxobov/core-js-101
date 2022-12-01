@@ -7,7 +7,9 @@
     "lint": "node node_modules/eslint/bin/eslint.js ./src",
     "lint:fix": "node node_modules/eslint/bin/eslint.js ./src --fix"
   },
-  "author": "aorgish, mikhama",
+  "author": {
+    "name": "Otabek"
+  },
   "license": "MIT",
   "devDependencies": {
     "eslint": "^6.6.0",
@@ -17,6 +19,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mikhama/core-js-101.git"
+    "url": "https://github.com/OtabekVaxobov/core-js-101.git"
   }
 }
