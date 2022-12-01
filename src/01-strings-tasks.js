@@ -171,8 +171,8 @@ function convertToUpperCase(str) {
  *   ],
  *   'info@gmail.com' => ['info@gmail.com']
  */
-function extractEmails(/* str */) {
-  throw new Error('Not implemented');
+function extractEmails(str) {
+  return str.match(/([a-zA-Z0-9._+-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
 }
 
 /**
@@ -196,10 +196,16 @@ function extractEmails(/* str */) {
  *             '┌──────────┐\n'+
  *  (12,3) =>  '│          │\n'+
  *             '└──────────┘\n'
- *
+ * let tl = '┌' + '─'.repeat(width - 2) + '┐\n';
+   let ml = '│' + ' '.repeat(width - 2) + '│\n';
+   let dl = '└' + '─'.repeat(width - 2) + '┘\n';
+   return tl + ml.repeat(height - 2) + dl;
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
+function getRectangleString(width, height) {
+  const tl = `┌${'─'.repeat(width - 2)}┐\n`;
+  const ml = `│${' '.repeat(width - 2)}│\n`;
+  const dl = `└${'─'.repeat(width - 2)}┘\n`;
+  return tl + ml.repeat(height - 2) + dl;
 }
 
 /**
@@ -218,8 +224,10 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const originalAlpha = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const cipher = 'nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM';
+  return str.replace(/[a-z]/gi, (letter) => cipher[originalAlpha.indexOf(letter)]);
 }
 
 /**
@@ -235,8 +243,9 @@ function encodeToRot13(/* str */) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(/* value */) {
-  throw new Error('Not implemented');
+function isString(value) {
+  if (typeof value === 'string' || value instanceof String) return true;
+  return false;
 }
 
 /**
