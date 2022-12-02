@@ -22,8 +22,8 @@
  *   getComposition(Math.sin, Math.asin)(x) => Math.sin(Math.asin(x))
  *
  */
-function getComposition(/* f, g */) {
-  throw new Error('Not implemented');
+function getComposition(f, g) {
+  return (x) => f(g(x));
 }
 
 /**
@@ -42,8 +42,8 @@ function getComposition(/* f, g */) {
  *   power05(16) => 4
  *
  */
-function getPowerFunction(/* exponent */) {
-  throw new Error('Not implemented');
+function getPowerFunction(exponent) {
+  return (x) => x ** exponent;
 }
 
 /**
@@ -77,8 +77,15 @@ function getPolynom() {
  *   ...
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
-function memoize(/* func */) {
-  throw new Error('Not implemented');
+function memoize(func) {
+  const memo = {};
+  return function mem(arg) {
+    if (memo[`${arg}`]) {
+      return memo[`${arg}`];
+    }
+    memo[`${arg}`] = func(arg);
+    return memo[`${arg}`];
+  };
 }
 
 /**
@@ -123,8 +130,13 @@ function retry(/* func, attempts */) {
  * cos(3.141592653589793) ends
  *
  */
-function logger(/* func, logFunc */) {
-  throw new Error('Not implemented');
+function logger(func, logFunc) {
+  return function log(...args) {
+    logFunc(`${func.name}(${args.map((arg) => JSON.stringify(arg))}) starts`);
+    const res = func(...args);
+    logFunc(`${func.name}(${args.map((arg) => JSON.stringify(arg))}) ends`);
+    return res;
+  };
 }
 
 /**
@@ -140,8 +152,11 @@ function logger(/* func, logFunc */) {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-function partialUsingArguments(/* fn, ...args1 */) {
-  throw new Error('Not implemented');
+function partialUsingArguments(fn, ...args1) {
+  return function part(...args2) {
+    const argsArray = [...args1, ...args2];
+    return fn(...argsArray);
+  };
 }
 
 /**
@@ -161,8 +176,13 @@ function partialUsingArguments(/* fn, ...args1 */) {
  *   getId4() => 7
  *   getId10() => 11
  */
-function getIdGeneratorFunction(/* startFrom */) {
-  throw new Error('Not implemented');
+function getIdGeneratorFunction(startFrom) {
+  let val = startFrom;
+  return function idGen() {
+    const valToReturn = val;
+    val += 1;
+    return valToReturn;
+  };
 }
 
 module.exports = {
